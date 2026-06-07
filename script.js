@@ -58,6 +58,35 @@ const addToCart = ({ name, price, image, size = "M", color = "Negro" }) => {
 document.addEventListener("DOMContentLoaded", () => {
   updateCartBadges();
 
+  const navToggle = document.querySelector(".nav-toggle");
+  const navId = navToggle?.getAttribute("aria-controls");
+  const brandNav = navId ? document.getElementById(navId) : document.querySelector(".brand-nav, .shop-nav");
+
+  if (navToggle && brandNav) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = brandNav.classList.toggle("is-open");
+      navToggle.classList.toggle("is-open", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  }
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    revealElements.forEach((element) => observer.observe(element));
+  } else {
+    revealElements.forEach((element) => element.classList.add("is-visible"));
+  }
+
   document.querySelectorAll(".buy-btn").forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
@@ -113,21 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  document.querySelectorAll(".blog-tabs a").forEach((tab) => {
-    tab.addEventListener("click", (event) => {
-      event.preventDefault();
-      const filter = tab.dataset.filter;
-
-      document.querySelectorAll(".blog-tabs a").forEach((item) => item.classList.remove("active"));
-      tab.classList.add("active");
-
-      document.querySelectorAll(".post-card").forEach((post) => {
-        post.classList.toggle("is-hidden", filter !== "todos" && post.dataset.category !== filter);
-      });
-    });
-  });
-
-  document.querySelectorAll(".message-card, .newsletter form").forEach((form) => {
+  document.querySelectorAll(".message-card").forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       form.reset();

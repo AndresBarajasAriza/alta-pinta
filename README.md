@@ -1,4 +1,4 @@
-# Alta Pinta
+# APpage
 
 Sitio web estatico para una marca de camisetas urbanas.
 
@@ -8,7 +8,6 @@ Sitio web estatico para una marca de camisetas urbanas.
 - `catalogo.html`: coleccion de productos
 - `producto.html`: detalle de producto
 - `sobre.html`: pagina sobre la marca
-- `blog.html`: blog editorial
 - `contacto.html`: formulario de contacto
 - `carrito.html`: carrito de compras
 - `style.css`: estilos generales
@@ -20,5 +19,4 @@ Sitio web estatico para una marca de camisetas urbanas.
 - Botones para agregar productos al carrito
 - Selector de tallas y colores
 - Galeria de miniaturas en detalle de producto
-- Filtros de categorias en el blog
 - Mensajes visuales al enviar formularios
